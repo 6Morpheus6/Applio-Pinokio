@@ -1,8 +1,8 @@
 const path = require('path')
 module.exports = {
-  version: "1.5",
+  version: "3.2.5",
   title: "Applio",
-  description: "VITS-based Voice Conversion focused on simplicity, quality and performance",
+  description: "A simple, high-quality voice conversion tool focused on ease of use and performance.",
   icon: "ICON.ico",
   menu: async (kernel) => {
     let installing = await kernel.running(__dirname, "install.js")
