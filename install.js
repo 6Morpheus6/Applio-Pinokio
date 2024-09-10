@@ -22,7 +22,7 @@ module.exports = {
         },
         path: "applio",
         message: [
-          "python.exe -m pip install pip<24.1",
+          "python -m pip install pip<24.1",
           "pip install --upgrade setuptools",
           "pip install -r requirements.txt",
           "pip uninstall torch torchvision torchaudio -y",
