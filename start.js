@@ -5,9 +5,7 @@ module.exports = {
       id: "start",
       method: "shell.run",
       params: {
-        conda: {
-          path: "env",
-        },
+        venv: "env",
         path: "applio",
         message: [
           "python app.py",
@@ -29,12 +27,6 @@ module.exports = {
       params: {
         uri: "{{local.url}}",
         name: "Local Sharing"
-      }
-    },
-    {
-      method: "notify",
-      params: {
-        html: "Click the 'Open Web UI' button to open the web interface",
       }
     }
   ]
