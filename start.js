@@ -6,6 +6,9 @@ module.exports = {
       method: "shell.run",
       params: {
         venv: "env",
+        env: {
+          PYTORCH_ENABLE_MPS_FALLBACK: 1
+        },
         path: "applio",
         message: [
           "python app.py",
