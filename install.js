@@ -9,7 +9,7 @@ module.exports = {
     {
       method: "shell.run",
       params: {
-        path: "app",
+        path: "applio",
         message: [
           "git reset --hard 5db5e53ad30cc69007e576d96f85fdd932c9fea8"
         ]
