@@ -4,20 +4,31 @@ module.exports = {
   title: "Applio",
   description: "A simple, high-quality voice conversion tool focused on ease of use and performance.",
   icon: "ICON.ico",
-  menu: async (kernel) => {
-    let installing = await kernel.running(__dirname, "install.js")
-    let installed = await kernel.exists(__dirname, "applio", "env")
-    let running = await kernel.running(__dirname, "start.js")
-    if (installing) {
+  menu: async (kernel, info) => {
+     let installed = info.exists("applio/env")
+    let running = {
+      install: info.running("install.js"),
+      start: info.running("start.js"),
+      update: info.running("update.js"),
+      reset: info.running("reset.js")
+    }
+    if (running.install) {
       return [{
         default: true,
         icon: "fa-solid fa-plug",
         text: "Installing",
         href: "install.js",
       }]
+    } else if (running.update) {
+      return [{
+        default: true,
+        icon: 'fa-solid fa-terminal',
+        text: "Updating",
+        href: "update.js",
+      }]
     } else if (installed) {
-      if (running) {
-        let local = kernel.memory.local[path.resolve(__dirname, "start.js")]
+      if (running.start) {
+        let local = info.local("start.js")
         if (local && local.url) {
           return [{
             default: true,
@@ -37,6 +48,13 @@ module.exports = {
             href: "start.js",
           }]
         }
+      } else if (running.reset) {
+          return [{
+            default: true,
+            icon: 'fa-solid fa-terminal',
+            text: "Resetting",
+            href: "reset.js",
+          }]
       } else {
         return [{
           default: true,
@@ -53,7 +71,7 @@ module.exports = {
           href: "install.js",
         }, {
           icon: "fa-regular fa-circle-xmark",
-          text: "Reset (Uninstall)",
+          text: "Reset",
           href: "reset.js",
         }]
       }
