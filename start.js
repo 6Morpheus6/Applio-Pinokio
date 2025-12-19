@@ -1,4 +1,7 @@
 module.exports = {
+  requires: {
+    bundle: "ai",
+  },
   daemon: true,
   run:[
     {
@@ -7,7 +10,8 @@ module.exports = {
       params: {
         venv: "env",
         env: {
-          PYTORCH_ENABLE_MPS_FALLBACK: 1
+          PYTORCH_ENABLE_MPS_FALLBACK: 1,
+          TF_ENABLE_ONEDNN_OPTS: 0
         },
         path: "app",
         message: [
@@ -23,13 +27,6 @@ module.exports = {
       method: "local.set",
       params: {
         url: "{{input.event[0]}}"
-      }
-    },
-    {
-      method: "proxy.start",
-      params: {
-        uri: "{{local.url}}",
-        name: "Local Sharing"
       }
     }
   ]
